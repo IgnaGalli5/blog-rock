@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debates - Foo Fighters</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <h1 class="logo">Foo Fighters</h1>
+            <p class="tagline">Rock legendario desde 1994</p>
+        </div>
+        <button class="mobile-menu-btn" id="mobile-menu-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav id="main-nav">
+            <a href="index.html">Inicio</a>
+            <a href="biografia.html">Biografía</a>
+            <a href="debates.html">Debates</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Sección principal de la página -->
+        <section class="main-content">
+            <div id="debates">
+                <h2>Discute con otros fanáticos</h2>
+                
+                <div id="comentarios" class="fade-in">
+                    <h3>Comentarios</h3>
+                    <form id="form-comentario">
+                        <input type="text" id="nickname" name="nickname" placeholder="Ingresa tu nick" required>
+                        <textarea id="comentario" name="comentario" placeholder="Escribe tu comentario aquí" required></textarea>
+                        <button type="submit">Enviar</button>
+                    </form>
+                    <div id="comentarios-lista">
+                        <!-- Aquí aparecerán los comentarios -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de anuncios en la columna derecha -->
+        <aside class="sidebar">
+            <h3>ANUNCIOS</h3>
+            <div class="ad fade-in">
+                <h4>Concierto: Red Hot Chili Peppers</h4>
+                <img src="rdcp.jpg" alt="RHCP Concierto">
+                <p>¡No te pierdas a los Red Hot Chili Peppers en vivo! Fecha: 22 de Noviembre, Estadio River Plate. <a href="#">Compra tus entradas aquí</a></p>
+            </div>
+            <div class="ad fade-in">
+                <h4>Venta de Guitarras Gibson</h4>
+                <img src="guitar.jpg" alt="Venta de guitarras">
+                <p>Las mejores guitarras Gibson al mejor precio. Compra online con envío gratis. <a href="#">Ver catálogo</a></p>
+            </div>
+            <div class="ad fade-in">
+                <h4>Festival Lollapalooza 2024</h4>
+                <img src="lolla.png" alt="Festival Lollapalooza">
+                <p>Bandas confirmadas: Arctic Monkeys, Billie Eilish, Metallica, y más. Del 28 al 30 de marzo en Buenos Aires. <a href="#">Ver más información</a></p>
+            </div>
+            <div class="ad fade-in">
+                <h4>Equipo de sonido Marshall</h4>
+                <img src="marhs.jpg" alt="Marshall amplificadores">
+                <p>¡Sonido potente para músicos exigentes! Consigue amplificadores Marshall desde $299. <a href="#">Descubre más</a></p>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Foo Fighters Fan Page | Todos los derechos reservados</p>
+    </footer>
+
+    <script>
+        // Menú móvil
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+            document.getElementById('main-nav').classList.toggle('active');
+        });
+
+        // Verificamos si existen comentarios y nicknames ya almacenados
+        let nicknames = JSON.parse(localStorage.getItem('nicknames')) || [];
+        let comentariosGuardados = JSON.parse(localStorage.getItem('comentarios')) || [];
+        
+        // Al enviar el comentario
+        document.getElementById('form-comentario').addEventListener('submit', function (event) {
+            event.preventDefault();
+        
+            const nickname = document.getElementById('nickname').value;
+            const comentario = document.getElementById('comentario').value;
+        
+            // Verificar si el nickname ya existe en la lista de usuarios
+            if (nicknames.includes(nickname)) {
+                alert('El nick "' + nickname + '" ya está en uso. Elige otro.');
+            } else {
+                // Agregar el nuevo nick a la lista de nicknames
+                nicknames.push(nickname);
+                localStorage.setItem('nicknames', JSON.stringify(nicknames));
+        
+                // Guardar el comentario en el array de comentarios
+                const nuevoComentario = { nickname: nickname, comentario: comentario };
+                comentariosGuardados.push(nuevoComentario);
+                localStorage.setItem('comentarios', JSON.stringify(comentariosGuardados));
+        
+                // Mostrar el comentario en la página
+                mostrarComentario(nickname, comentario);
+            }
+        
+            // Limpiar los campos
+            document.getElementById('form-comentario').reset();
+        });
+        
+        // Función para mostrar los comentarios en la página
+        function mostrarComentario(nickname, comentario) {
+            const comentariosLista = document.getElementById('comentarios-lista');
+        
+            const nuevoComentario = document.createElement('div');
+            nuevoComentario.classList.add('comentario');
+            nuevoComentario.innerHTML = `<p><strong>${nickname}:</strong> ${comentario}</p>`;
+        
+            comentariosLista.appendChild(nuevoComentario);
+        }
+        
+        // Cargar los comentarios guardados en localStorage al cargar la página
+        window.onload = function() {
+            comentariosGuardados.forEach(coment => {
+                mostrarComentario(coment.nickname, coment.comentario);
+            });
+
+            // Animación de elementos al hacer scroll
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            function checkFade() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 100) {
+                        element.classList.add('visible');
+                    }
+                });
+            }
+            
+            // Verificar al cargar la página
+            checkFade();
+            
+            // Verificar al hacer scroll
+            window.addEventListener('scroll', checkFade);
+        };
+    </script>
+</body>
+</html>

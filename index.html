@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foo Fighters - Página Oficial</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <h1 class="logo">Foo Fighters</h1>
+            <p class="tagline">Rock legendario desde 1994</p>
+        </div>
+        <button class="mobile-menu-btn" id="mobile-menu-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav id="main-nav">
+            <a href="index.html">Inicio</a>
+            <a href="biografia.html">Biografía</a>
+            <a href="debates.html">Debates</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Sección principal de la página -->
+        <section class="main-content">
+            <div class="band-intro fade-in">
+                <h2>Foo Fighters</h2>
+                <div class="band-image">
+                    <img src="foo1.jpg" alt="Foo Fighters Band">
+                </div>
+                <div class="band-description">
+                    <p>En medio de la turbulenta era post-Nirvana, surgió un hilo de esperanza en la forma de una banda liderada por el carismático y talentoso Dave Grohl. En los albores del nuevo milenio, los Foo Fighters irrumpieron en la escena musical con una energía arrolladora que resonó en los corazones de una generación sedienta de autenticidad y pasión.</p>
+                    
+                    <p>Su álbum debut homónimo en 1995 marcó el comienzo de una carrera meteórica, catapultando a la banda a la fama mundial con himnos como "This Is a Call" y "Big Me". A lo largo de los años, los Foo Fighters continuaron deslumbrando al público con su mezcla única de rock alternativo y letras emotivas, consolidándose como una de las bandas más influyentes de su generación.</p>
+                    
+                    <p>Eventos trascendentales como la trágica pérdida de su baterista Taylor Hawkins en 2022 y la emotiva colaboración con el legendario productor Butch Vig en "Wasting Light" en 2011, marcaron momentos cruciales en la historia de la banda, demostrando su inquebrantable espíritu y determinación.</p>
+                </div>
+                <div class="band-image">
+                    <img src="foo.jpg" alt="Foo Fighters en concierto">
+                </div>
+                <div class="band-description">
+                    <p>A lo largo de su carrera, los Foo Fighters han lanzado una impresionante discografía que incluye álbumes icónicos como "The Colour and the Shape", "Echoes, Silence, Patience & Grace" y "Concrete and Gold", consolidando su reputación como maestros del rock moderno y atemporal.</p>
+                    
+                    <p>Sus conciertos, auténticas experiencias catárticas, han dejado una huella imborrable en la historia de la música en vivo. Desde sus legendarios shows en el estadio de Wembley en 2008 hasta su arrolladora actuación en el Festival de Glastonbury en 2017, los Foo Fighters han demostrado una y otra vez su capacidad para electrizar a las multitudes y conectarse de manera profunda con sus seguidores.</p>
+                    
+                    <p>En definitiva, los Foo Fighters no son solo una banda de rock, son un fenómeno cultural que ha trascendido el tiempo y el espacio, dejando una marca indeleble en el paisaje musical contemporáneo. Su legado perdurará por generaciones, inspirando a músicos y fans por igual a seguir el camino de la pasión y la autenticidad.</p>
+                </div>
+                <div class="band-fact">
+                    Los Foo Fighters han ganado 12 premios Grammy a lo largo de su carrera, consolidándose como una de las mejores bandas de rock del mundo.
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de anuncios en la columna derecha -->
+        <aside class="sidebar">
+            <h3>ANUNCIOS</h3>
+            <div class="ad fade-in">
+                <h4>Concierto: Red Hot Chili Peppers</h4>
+                <img src="rdcp.jpg" alt="RHCP Concierto">
+                <p>¡No te pierdas a los Red Hot Chili Peppers en vivo! Fecha: 22 de Noviembre, Estadio River Plate. <a href="#">Compra tus entradas aquí</a></p>
+            </div>
+            <div class="ad fade-in">
+                <h4>Venta de Guitarras Gibson</h4>
+                <img src="guitar.jpg" alt="Venta de guitarras">
+                <p>Las mejores guitarras Gibson al mejor precio. Compra online con envío gratis. <a href="#">Ver catálogo</a></p>
+            </div>
+            <div class="ad fade-in">
+                <h4>Festival Lollapalooza 2024</h4>
+                <img src="lolla.png" alt="Festival Lollapalooza">
+                <p>Bandas confirmadas: Arctic Monkeys, Billie Eilish, Metallica, y más. Del 28 al 30 de marzo en Buenos Aires. <a href="#">Ver más información</a></p>
+            </div>
+            <div class="ad fade-in">
+                <h4>Equipo de sonido Marshall</h4>
+                <img src="marhs.jpg" alt="Marshall amplificadores">
+                <p>¡Sonido potente para músicos exigentes! Consigue amplificadores Marshall desde $299. <a href="#">Descubre más</a></p>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Foo Fighters Fan Page | Todos los derechos reservados</p>
+    </footer>
+
+    <script>
+        // Menú móvil
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+            document.getElementById('main-nav').classList.toggle('active');
+        });
+
+        // Animación de elementos al hacer scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            function checkFade() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 100) {
+                        element.classList.add('visible');
+                    }
+                });
+            }
+            
+            // Verificar al cargar la página
+            checkFade();
+            
+            // Verificar al hacer scroll
+            window.addEventListener('scroll', checkFade);
+        });
+    </script>
+</body>
+</html>
